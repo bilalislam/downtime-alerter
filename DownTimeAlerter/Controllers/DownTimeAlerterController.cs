@@ -34,7 +34,7 @@ namespace ServiceWorkerCronJobDemo.Controllers
 
 
         [HttpPost]
-        public async Task Create([FromBody] CreateDownTimeAlerterViewModel model, CancellationToken cancellationToken){
+        public async Task Create([FromBody] DownTimeAlerterViewModel model, CancellationToken cancellationToken){
             if (model == null) return;
             _timers.TryGetValue(model.Name, out var app);
 
@@ -50,7 +50,7 @@ namespace ServiceWorkerCronJobDemo.Controllers
         }
 
         [HttpPut]
-        public void Update(string name, [FromBody] UpdateDownTimeAlerterViewModel model){
+        public void Update(string name, [FromBody] DownTimeAlerterViewModel model){
             if (string.IsNullOrEmpty(name)) return;
             _timers.TryGetValue(name, out var app);
             if (app != null){
