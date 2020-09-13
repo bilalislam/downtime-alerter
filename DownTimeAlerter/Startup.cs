@@ -1,3 +1,4 @@
+using DownTimeAlerter.Notification;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +19,10 @@ namespace ServiceWorkerCronJobDemo
         public void ConfigureServices(IServiceCollection services){
             services.AddControllers();
             services.AddSwaggerGen();
-            services.AddScoped<IScheduleService, ScheduleService>();
+            services.AddScoped<IScheduler, Scheduler>();
+            services.AddScoped<IUrlStatusChecker, UrlStatusChecker>();
+            services.AddScoped<NotificationFactory>();
+            services.AddHttpClient();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env){

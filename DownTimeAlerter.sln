@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DownTimeAlerter", "DownTimeAlerter\DownTimeAlerter.csproj", "{B82EDA18-CDF0-4C13-B808-4D9DA73A88A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DownTimeAlerter.Notification", "DownTimeAlerter.Notification\DownTimeAlerter.Notification.csproj", "{6C38038D-35D4-4AA2-BF1D-7F69BC76C21C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DownTimeAlerter.Tests", "DownTimeAlerter.Tests\DownTimeAlerter.Tests.csproj", "{21EE9B75-4054-409E-963C-3CEA57DEEBEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,30 @@ Global
 		{B82EDA18-CDF0-4C13-B808-4D9DA73A88A7}.Release|x64.Build.0 = Release|Any CPU
 		{B82EDA18-CDF0-4C13-B808-4D9DA73A88A7}.Release|x86.ActiveCfg = Release|Any CPU
 		{B82EDA18-CDF0-4C13-B808-4D9DA73A88A7}.Release|x86.Build.0 = Release|Any CPU
+		{6C38038D-35D4-4AA2-BF1D-7F69BC76C21C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C38038D-35D4-4AA2-BF1D-7F69BC76C21C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C38038D-35D4-4AA2-BF1D-7F69BC76C21C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6C38038D-35D4-4AA2-BF1D-7F69BC76C21C}.Debug|x64.Build.0 = Debug|Any CPU
+		{6C38038D-35D4-4AA2-BF1D-7F69BC76C21C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6C38038D-35D4-4AA2-BF1D-7F69BC76C21C}.Debug|x86.Build.0 = Debug|Any CPU
+		{6C38038D-35D4-4AA2-BF1D-7F69BC76C21C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C38038D-35D4-4AA2-BF1D-7F69BC76C21C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C38038D-35D4-4AA2-BF1D-7F69BC76C21C}.Release|x64.ActiveCfg = Release|Any CPU
+		{6C38038D-35D4-4AA2-BF1D-7F69BC76C21C}.Release|x64.Build.0 = Release|Any CPU
+		{6C38038D-35D4-4AA2-BF1D-7F69BC76C21C}.Release|x86.ActiveCfg = Release|Any CPU
+		{6C38038D-35D4-4AA2-BF1D-7F69BC76C21C}.Release|x86.Build.0 = Release|Any CPU
+		{21EE9B75-4054-409E-963C-3CEA57DEEBEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21EE9B75-4054-409E-963C-3CEA57DEEBEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21EE9B75-4054-409E-963C-3CEA57DEEBEC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{21EE9B75-4054-409E-963C-3CEA57DEEBEC}.Debug|x64.Build.0 = Debug|Any CPU
+		{21EE9B75-4054-409E-963C-3CEA57DEEBEC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21EE9B75-4054-409E-963C-3CEA57DEEBEC}.Debug|x86.Build.0 = Debug|Any CPU
+		{21EE9B75-4054-409E-963C-3CEA57DEEBEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21EE9B75-4054-409E-963C-3CEA57DEEBEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21EE9B75-4054-409E-963C-3CEA57DEEBEC}.Release|x64.ActiveCfg = Release|Any CPU
+		{21EE9B75-4054-409E-963C-3CEA57DEEBEC}.Release|x64.Build.0 = Release|Any CPU
+		{21EE9B75-4054-409E-963C-3CEA57DEEBEC}.Release|x86.ActiveCfg = Release|Any CPU
+		{21EE9B75-4054-409E-963C-3CEA57DEEBEC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

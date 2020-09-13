@@ -6,4 +6,7 @@
     <ItemGroup>
       <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\DownTimeAlerter.Notification\DownTimeAlerter.Notification.csproj" />
+    </ItemGroup>
 </Project>
