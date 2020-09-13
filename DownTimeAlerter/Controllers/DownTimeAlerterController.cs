@@ -27,7 +27,7 @@ namespace ServiceWorkerCronJobDemo.Controllers
                 Name = x.Name,
                 Email = x.Email,
                 Url = x.Url,
-                Interval = x.Interval,
+                Interval = x.Timer.Interval,
                 NotificationType = x.NotificationType
             });
         }
