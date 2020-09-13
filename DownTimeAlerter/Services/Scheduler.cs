@@ -7,7 +7,7 @@ namespace ServiceWorkerCronJobDemo.Services
 {
     public interface IScheduler
     {
-        Task StartAsync(DownTimeAppDto downTimeAppDto, CancellationToken cancellationToken);
+        Task StartAsync(WorkerDto downTimeAppDto, CancellationToken cancellationToken);
     }
 
     public class Scheduler : IScheduler
@@ -20,7 +20,7 @@ namespace ServiceWorkerCronJobDemo.Services
             _notificationFactory = notificationFactory;
         }
 
-        public async Task StartAsync(DownTimeAppDto downTimeAppDto, CancellationToken cancellationToken){
+        public async Task StartAsync(WorkerDto downTimeAppDto, CancellationToken cancellationToken){
             downTimeAppDto.Timer.Elapsed += async (sender, args) =>
             {
                 if (!cancellationToken.IsCancellationRequested){

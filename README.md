@@ -11,8 +11,38 @@ bootstrap.
 * The application should be as stable as possible and well tested
 
 Summarize
-* Concurrent Timers Management
-* Crud processes of timers
+* Concurrent Worker Management
+* Crud processes of workers
 * Flexible Notification Services
 * Swagger Web Api
+* Default Logging
 * Unit Tests
+
+```sh
+dotnet watch run
+```
+
+Sample Create Worker
+* URL :http://localhost:5000/health-check
+```json 
+{
+  "Name":"test",
+  "Url":"http://www.google.com.tr",
+  "Interval":1000,
+  "Email":"test@test.com",
+  "NotificationType":1
+}
+```
+
+Sample Create Worker with bad url
+* URL :http://localhost:5000/health-check
+```json 
+{
+  "Name":"test2",
+  "Url":"http://www.google.com.t",
+  "Interval":2000,
+  "Email":"test@test.com",
+  "NotificationType":1
+}
+```
+ 

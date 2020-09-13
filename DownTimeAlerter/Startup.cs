@@ -20,6 +20,7 @@ namespace ServiceWorkerCronJobDemo
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddScoped<IScheduler, Scheduler>();
+            services.AddSingleton<IWorkerService, WorkerService>();
             services.AddScoped<IUrlStatusChecker, UrlStatusChecker>();
             services.AddScoped<NotificationFactory>();
             services.AddHttpClient();

@@ -4,9 +4,9 @@
         <RootNamespace>ServiceWorkerCronJobDemo</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-      <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\DownTimeAlerter.Notification\DownTimeAlerter.Notification.csproj" />
+        <ProjectReference Include="..\DownTimeAlerter.Notification\DownTimeAlerter.Notification.csproj" />
     </ItemGroup>
 </Project>
