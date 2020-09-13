@@ -34,7 +34,7 @@ namespace ServiceWorkerCronJobDemo.Controllers
 
 
         [HttpPost]
-        public async Task Create([FromBody] DownTimeAlerterViewModel model, CancellationToken cancellationToken){
+        public async Task Create([FromBody] CreateDownTimeAlerterViewModel model, CancellationToken cancellationToken){
             if (model == null) return;
             _timers.TryGetValue(model.Name, out var app);
 
@@ -50,25 +50,25 @@ namespace ServiceWorkerCronJobDemo.Controllers
         }
 
         [HttpPut]
-        public void Update([FromBody] DownTimeAlerterViewModel model){
-            if (string.IsNullOrEmpty(model.Name)) return;
-            _timers.TryGetValue(model.Name, out var app);
+        public void Update(string name, [FromBody] UpdateDownTimeAlerterViewModel model){
+            if (string.IsNullOrEmpty(name)) return;
+            _timers.TryGetValue(name, out var app);
             if (app != null){
                 app.Url = model.Url;
                 app.Timer.Interval = model.Interval;
             }
 
-            _timers.AddOrUpdate(model.Name, app, (key, old) => app);
+            _timers.AddOrUpdate(name, app, (key, old) => app);
         }
 
         /// <summary>
         /// timer dispose oldugunda elapsed olan delegation silinmesi lazım test et.
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="name"></param>
         [HttpDelete]
-        public void Delete([FromBody] DownTimeAlerterViewModel model){
-            if (string.IsNullOrEmpty(model.Name)) return;
-            _timers.Remove(model.Name, out var app);
+        public void Delete(string name){
+            if (string.IsNullOrEmpty(name)) return;
+            _timers.Remove(name, out var app);
             app.Timer.Dispose();
         }
     }
