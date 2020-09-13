@@ -42,7 +42,7 @@ namespace ServiceWorkerCronJobDemo.Controllers
         /// <returns></returns>
         [HttpPost]
         public async Task Create([FromBody] DownTimeAlerterViewModel model, CancellationToken cancellationToken){
-            if (model == null) return;
+            if (!ModelState.IsValid) return;
             _timers.TryGetValue(model.Name, out var app);
 
             app ??= new DownTimeAppDto()
@@ -63,18 +63,23 @@ namespace ServiceWorkerCronJobDemo.Controllers
         /// </summary>
         /// <param name="name"></param>
         /// <param name="model"></param>
+        /// <param name="cancellationToken"></param>
         [HttpPut("{name}")]
-        public void Update([FromRoute] string name, [FromBody] DownTimeAlerterViewModel model){
-            if (string.IsNullOrEmpty(name)) return;
+        public async Task Update([FromRoute] string name, [FromBody] DownTimeAlerterViewModel model,
+            CancellationToken cancellationToken){
+            if (string.IsNullOrEmpty(name) || !ModelState.IsValid) return;
+
             _timers.TryGetValue(name, out var app);
             if (app != null){
-                app.Name = model.Name;
-                app.Url = model.Url;
-                app.Email = model.Email;
-                app.NotificationType = model.NotificationType;
-                app.Timer.Interval = model.Interval;
-
-                _timers.AddOrUpdate(app.Name, app, (key, old) => app);
+                Delete(name);
+                await Create(new DownTimeAlerterViewModel()
+                {
+                    Name = model.Name,
+                    Url = model.Url,
+                    Email = model.Email,
+                    Interval = model.Interval,
+                    NotificationType = model.NotificationType
+                }, cancellationToken);
             }
         }
 
@@ -83,7 +88,7 @@ namespace ServiceWorkerCronJobDemo.Controllers
         public void Delete([FromRoute] string name){
             if (string.IsNullOrEmpty(name)) return;
             _timers.Remove(name, out var app);
-            app.Timer.Dispose();
+            app?.Timer.Dispose();
         }
     }
 }
