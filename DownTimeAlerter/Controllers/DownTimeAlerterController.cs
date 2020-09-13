@@ -1,8 +1,11 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Timers;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ServiceWorkerCronJobDemo.Services;
+using Timer = System.Timers.Timer;
 
 namespace ServiceWorkerCronJobDemo.Controllers
 {
@@ -13,6 +16,11 @@ namespace ServiceWorkerCronJobDemo.Controllers
         private static readonly ConcurrentDictionary<string, DownTimeAppDto> _timers =
             new ConcurrentDictionary<string, DownTimeAppDto>();
 
+        private readonly IScheduleService _scheduleService;
+
+        public DownTimeAlerterController(IScheduleService scheduleService){
+            _scheduleService = scheduleService;
+        }
 
         [HttpGet]
         public IEnumerable<DownTimeAlerterViewModel> Get(){
@@ -25,14 +33,8 @@ namespace ServiceWorkerCronJobDemo.Controllers
         }
 
 
-        /// <summary>
-        /// async call to service
-        /// timer elapsed
-        /// and timer dispose if removed
-        /// </summary>
-        /// <param name="model"></param>
         [HttpPost]
-        public void Create([FromBody] DownTimeAlerterViewModel model){
+        public async Task Create([FromBody] DownTimeAlerterViewModel model, CancellationToken cancellationToken){
             if (model == null) return;
             _timers.TryGetValue(model.Name, out var app);
 
@@ -44,28 +46,29 @@ namespace ServiceWorkerCronJobDemo.Controllers
             };
 
             _timers.TryAdd(app.Name, app);
+            await _scheduleService.Start(app, cancellationToken);
         }
 
         [HttpPut]
-        public void Update(string name, [FromBody] DownTimeAlerterViewModel model){
-            if (string.IsNullOrEmpty(name)) return;
-            _timers.TryGetValue(name, out var app);
+        public void Update([FromBody] DownTimeAlerterViewModel model){
+            if (string.IsNullOrEmpty(model.Name)) return;
+            _timers.TryGetValue(model.Name, out var app);
             if (app != null){
                 app.Url = model.Url;
                 app.Timer.Interval = model.Interval;
             }
 
-            _timers.AddOrUpdate(name, app, (key, old) => app);
+            _timers.AddOrUpdate(model.Name, app, (key, old) => app);
         }
 
         /// <summary>
         /// timer dispose oldugunda elapsed olan delegation silinmesi lazım test et.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="model"></param>
         [HttpDelete]
-        public void Delete(string name){
-            if (string.IsNullOrEmpty(name)) return;
-            _timers.Remove(name, out var app);
+        public void Delete([FromBody] DownTimeAlerterViewModel model){
+            if (string.IsNullOrEmpty(model.Name)) return;
+            _timers.Remove(model.Name, out var app);
             app.Timer.Dispose();
         }
     }
